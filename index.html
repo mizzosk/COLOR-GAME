@@ -7,18 +7,26 @@
     <link href="./style.css" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="header header-background">SPUST HRU</h1>
+    <h1 class="header">ZVOĽ HRÁČA</h1>
+    <div class="row">
+        <button class="player-button"><img src="./images/bebe.jpg" alt="Bebe"></button>
+        <button class="player-button"><img src="./images/luci.jpg" alt="Luci"></button>
+        <button class="player-button"><img src="./images/oli.jpg" alt="Oli"></button>
+        <button class="player-button"><img src="./images/mizzo.jpg" alt="mizzo"></button>
+    </div>
+    <div class="row">
+        <div class="button" id="blue"></div>
+        <div class="button" id="yellow"></div>
+    </div>
     <div class="row">
         <div class="button" id="green"></div>
         <div class="button" id="red"></div>
     </div>
-    <div class="row">
-        <div class="button" id="yellow"></div>
-        <div class="button" id="blue"></div>
-    </div>
+    <p class="top10"></p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./index.js" charset="utf-8"></script>
 </body>

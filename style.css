@@ -6,6 +6,7 @@ body{
     min-height: 100vh;
     margin: 0;
     background-color: rgb(1, 31, 63);
+    color: whitesmoke;
 }
 
 .row {
@@ -20,51 +21,101 @@ body{
     margin: 20px;
     text-align: center;
     line-height: 200px;
-    border: 10px outset;
+    border: 3px outset;
     border-radius: 50px;
-    border-color: black;
+    //border-color: black;
     cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 #green{
-    background-color: rgb(0, 128, 0);
+    background-color: rgb(0, 223, 162);
 }
 
 #red{
-    background-color:  rgb(255, 0, 0);
+    background-color:  rgb(255, 0, 96);
 }
 
 #yellow{
-    background-color:  rgb(255, 255, 0);
+    background-color:  rgb(246, 250, 112);
 }
 
 #blue{
-    background-color:  rgb(0, 0, 255);
+    background-color: rgb(0, 121, 255);
 }
 
 .header{
-    font-family: 'Press Start 2P', system-ui;
-    text-shadow: 4px 5px 1px rgba(0, 0, 0, 0.5);
-    color: #FEF2BF;
-    margin-bottom:50px;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     background-color: rgb(1, 31, 63);
-    width: 300px;
+    width: 250px;
     height: 50px;
-    margin: 20px;
+    margin: 2vh;
     text-align: center;
     line-height: 50px;
-    border: 10px outset;
+    border: 2px solid;
     border-radius: 50px;
-    border-color: black;
+}
+
+.header-success{
+    background-color: rgb(0, 223, 162);
+    color: black;
+}
+
+.player-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    border: 2px outset;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    background-color: black; /* Button background color */
     cursor: pointer;
-
+    position: relative;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.3s ease-in-out;box-shadow 0.3s;
 }
 
-.header-background{
-    background: linear-gradient(300deg, rgb(0, 128, 0), rgb(255, 0, 0), rgb(255, 255, 0),rgb(0, 0, 255));
+.player-button:hover {
+    transform: scale(1.1); /* Scale up the button on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.test{
-    background-color:  rgb(0, 0, 0);
+.player-button img {
+    width: 115%;
+    height: 115%;
+    object-fit: cover; /* Ensures the image covers the entire button */
+    border: none;
+}
+
+.top10{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+td:nth-child(3) {
+    text-align: center;
 }

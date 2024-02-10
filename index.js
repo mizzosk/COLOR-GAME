@@ -3,72 +3,145 @@ var buttonsColors = ["green","red","yellow","blue"];
 var gameColors = [];
 var levelColors = [];
 var level = 1;
-
+var user = "anonymous";
 
 function randomButtonSelect(){
     //change header to Level and
-    $("h1").text("Level " + level).css("color","#FEF2BF");
+    $("h1").text("Level " + level);
     level++;
     //generate random number / button color selection
     var randomNumber = Math.floor(Math.random() * 4);
-    console.log(randomNumber);
     var randomColor = buttonsColors[randomNumber];
-    console.log(randomColor);
     //add random color to buttonsGame color array
     gameColors.push(randomColor);
     levelColors = gameColors;
     console.log(gameColors);
-    $("#"+randomColor).fadeToggle(1000).fadeToggle(1000);
+    $("#"+randomColor).fadeToggle(700).fadeToggle(700);
 };
 
 
-//capture keypress
-$("h1").on("click",function(event){
-    if(gameStatus === 0){
-        console.log("test");
-        $(this).fadeToggle(100).fadeToggle(100);
-        $(this).removeClass("header-background");
-        if(gameStatus ===0) {
-            gameStatus = 1; 
-            console.log(gameStatus)
-            randomButtonSelect();       
-        }
-    }
+//start the game
+$(".player-button").on("click",function(event){
+    gameStatus = 1; 
+    level = 1;
+    user = $(this).find('img').attr('alt')
+    $(".player-button").hide();
+    $(".top10").hide();
+    $(".button").show();
+    randomButtonSelect();   
 });
 
 //capture button click
 $(".button").on("click",function(event){
     var pressedButtonColor = event.target.id;
     console.log(pressedButtonColor);
-    $("#"+pressedButtonColor).fadeToggle(100).fadeToggle(100);
     if(levelColors[0] === pressedButtonColor && levelColors.length>1 && gameStatus === 1){
+        $("#"+pressedButtonColor).fadeToggle(100).fadeToggle(100);
         console.log("farby sedia");
         levelColors = levelColors.slice(1);
         console.log(levelColors);       
     } else if (levelColors[0] === pressedButtonColor && levelColors.length===1 && gameStatus === 1){
+        $("#"+pressedButtonColor).fadeToggle(100).fadeToggle(100);
         console.log("farby sedia");
-        $("h1").text("SUPER");
         setTimeout(function() {
             randomButtonSelect();
-            }, 1500);        
+            }, 2300);        
     } else if(levelColors[0] !== pressedButtonColor && gameStatus === 1){
         gameColors = [];
         levelColors = [];
-        level = 1;
+        $(".button").hide();
         $("body").css("backgroundColor", "red");
         setTimeout(function() {
         $("body").css("backgroundColor", "rgb(1, 31, 63)");
-        }, 500);
+        }, 200);
         gameStatus = 0;
-        $("h1").addClass("header-background");
-        $("h1").text("SPUST HRU");        
+        $("h1").text("ZVOĽ HRÁČA"); 
+        $(".player-button").show();
+
+        //displaying top 10 list
+        top10();
+        $(".button").hide();
+
     }
 
 });
 
 
+function top10(){
+    $(".top10").show();
+ // Function to save the user's name and achieved level
+function saveUserLevel(user, level) {
+
+    // Retrieve existing user levels or initialize an empty array
+    const userLevels = JSON.parse(localStorage.getItem('userLevels')) || [];
+
+    // Create a new user entry with the achieved level
+    const userEntry = { user, level };
+
+    // Add the new user entry to the array
+    userLevels.push(userEntry);
+
+    // Sort the array in descending order based on levels
+    userLevels.sort((a, b) => b.level - a.level);
+
+    // Keep only the top ten levels
+    const top10UserLevels = userLevels.slice(0, 10);
+
+    // Save the updated user levels to localStorage
+    localStorage.setItem('userLevels', JSON.stringify(userLevels));
+    // Save the top 10 levels to another key in localStorage if needed
+    localStorage.setItem('top10UserLevels', JSON.stringify(top10UserLevels));
+
+    // Display the levels on the webpage
+    displayUserLevels();
+}
+
+// Function to display top ten user levels as a table
+function displayUserLevels() {
+    const top10UserLevels = JSON.parse(localStorage.getItem('top10UserLevels')) || [];
+
+    // Create a table HTML string
+    let tableHtml = '<table border="1">';
+    tableHtml += '<tr><th>Rank</th><th>Player</th><th>Level</th></tr>';
+
+    // Initialize ranking outside the loop
+    let ranking = 1;
+
+    // Populate the table rows with user names, levels, and rankings
+    top10UserLevels.forEach(entry => {
+        tableHtml += `<tr><td>${ranking + "."}</td><td>${entry.user}</td><td>${entry.level}</td></tr>`;
+        ranking++; // Increment ranking for each iteration
+    });
+
+    tableHtml += '</table>';
+
+    // Set the innerHTML of the <p> element with class "top10" to the table HTML
+    document.querySelector('.top10').innerHTML = tableHtml;
+}
+
+saveUserLevel(user, level-1);
+
+// // Display the levels on the webpage when it loads
+// displayUserLevels();
+
+// function deleteTop10UserLevels() {
+
+//     localStorage.removeItem('top10UserLevels');
 
 
+//     displayUserLevels();
+// };
 
-	
-		
+// deleteTop10UserLevels();
+
+// function deleteAllUserLevels() {
+//     // Remove all user levels from localStorage
+//     localStorage.removeItem('userLevels');
+//     localStorage.removeItem('top10UserLevels');
+
+//     displayUserLevels();
+// }
+// deleteAllUserLevels();
+
+
+}
