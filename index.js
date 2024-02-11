@@ -40,11 +40,13 @@ $(".button").on("click",function(event){
     console.log(pressedButtonColor);
     if(levelColors[0] === pressedButtonColor && levelColors.length>1 && gameStatus === 1){
         $("#"+pressedButtonColor).fadeToggle(100).fadeToggle(100);
+        $("h1").text(levelColors.length-1);
         console.log("farby sedia");
         levelColors = levelColors.slice(1);
         console.log(levelColors);       
     } else if (levelColors[0] === pressedButtonColor && levelColors.length===1 && gameStatus === 1){
         $("#"+pressedButtonColor).fadeToggle(100).fadeToggle(100);
+        $("h1").text("SPRAVNE");
         console.log("farby sedia");
         setTimeout(function() {
             randomButtonSelect();
@@ -55,16 +57,24 @@ $(".button").on("click",function(event){
         $(".button").hide();
         $("body").css("backgroundColor", "red");
         setTimeout(function() {
-        $("body").css("backgroundColor", "rgb(1, 31, 63)");
+            $("body").css("backgroundColor", "rgb(1, 31, 63)");
         }, 200);
-        gameStatus = 0;
-        $("h1").text("ZVOĽ HRÁČA"); 
-        $(".player-button").show();
-
-        //displaying top 10 list
-        top10();
-        $(".button").hide();
-
+        //reorders h1 after p element
+        $("h1").insertAfter($("p"));
+        //shows player icon
+        $(".player-button img[alt='" + user + "']").parent().show();
+        //remove class player-button to make the icon not clickable
+        //$(".player-button img[alt='" + user + "']").parent().removeClass("test");
+        $("h1").text("Level " + (level-2));  
+        setTimeout(function() {
+            gameStatus = 0;
+            //reorders h1 element back to initial place right after body starts
+            $("h1").prependTo("body");
+            $("h1").text("ZVOĽ HRÁČA"); 
+            $(".player-button").show();  
+            //displaying top 10 list
+            top10();
+        }, 3000);
     }
 
 });
@@ -105,7 +115,7 @@ function displayUserLevels() {
 
     // Create a table HTML string
     let tableHtml = '<table border="1">';
-    tableHtml += '<tr><th>Rank</th><th>Player</th><th>Level</th></tr>';
+    tableHtml += '<tr><th>Poradie</th><th>Hráč</th><th>Level</th></tr>';
 
     // Initialize ranking outside the loop
     let ranking = 1;
