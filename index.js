@@ -21,10 +21,13 @@ function randomButtonSelect(){
 
 
 //start the game
-$(".player-button").on("click",function(event){
+$(".player-button").on("click",function(){
     gameStatus = 1; 
     level = 1;
     user = $(this).find('img').attr('alt')
+    setTimeout(function() {
+        $(this).fadeToggle(100).fadeToggle(100);
+        }, 200);
     $(".player-button").hide();
     $(".top10").hide();
     $(".button").show();
@@ -45,7 +48,7 @@ $(".button").on("click",function(event){
         console.log("farby sedia");
         setTimeout(function() {
             randomButtonSelect();
-            }, 2300);        
+            }, 2000);        
     } else if(levelColors[0] !== pressedButtonColor && gameStatus === 1){
         gameColors = [];
         levelColors = [];
@@ -119,7 +122,7 @@ function displayUserLevels() {
     document.querySelector('.top10').innerHTML = tableHtml;
 }
 
-saveUserLevel(user, level-1);
+saveUserLevel(user, level-2);
 
 // // Display the levels on the webpage when it loads
 // displayUserLevels();
